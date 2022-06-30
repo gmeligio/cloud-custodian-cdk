@@ -1,7 +1,7 @@
 import { compileFromFile } from 'json-schema-to-typescript';
 import * as fs from 'fs';
-		
+
 // compile from file
-compileFromFile('./config/schema.json').then((ts) =>
-    fs.writeFileSync('./src/generated/schema.d.ts', ts)
-);
+compileFromFile('./config/schema/aws.json', {
+	strictIndexSignatures: true,
+}).then((ts) => fs.writeFileSync('./src/generated/awsSchema.ts', ts));

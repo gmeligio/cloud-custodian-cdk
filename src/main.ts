@@ -1,12 +1,13 @@
 import { Construct } from 'constructs';
 import { App, TerraformStack } from 'cdktf';
-// import * as schema from './'
+import { VpcEndpoint } from './generated/awsSchema';
 
 class MyStack extends TerraformStack {
 	constructor(scope: Construct, name: string) {
 		super(scope, name);
 
 		// define resources here
+		// vpc: VpcEndpoint = new VpcEndpoint();
 	}
 }
 
