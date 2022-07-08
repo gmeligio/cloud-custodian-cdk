@@ -9,8 +9,8 @@ const project = new cdktf.ConstructLibraryCdktf({
   jest: false,
   mergify: false,
   license: 'MIT',
+  deps: ['ajv'],
 
-  // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */

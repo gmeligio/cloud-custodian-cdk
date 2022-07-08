@@ -1,0 +1,3682 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "http://schema.cloudcustodian.io/v0/custodian.json",
+  "definitions": {
+    "resources": {
+      "aws.vpc": {
+        "actions": {
+          "set-flow-log": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "enum": [
+                  "set-flow-log"
+                ]
+              },
+              "state": {
+                "type": "boolean"
+              },
+              "DeliverLogsPermissionArn": {
+                "type": "string"
+              },
+              "LogGroupName": {
+                "type": "string"
+              },
+              "LogDestination": {
+                "type": "string"
+              },
+              "LogFormat": {
+                "type": "string"
+              },
+              "MaxAggregationInterval": {
+                "type": "integer"
+              },
+              "LogDestinationType": {
+                "enum": [
+                  "s3",
+                  "cloud-watch-logs"
+                ]
+              },
+              "TrafficType": {
+                "type": "string",
+                "enum": [
+                  "ACCEPT",
+                  "REJECT",
+                  "ALL"
+                ]
+              }
+            }
+          }
+        },
+        "filters": {
+          "dhcp-options": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "dhcp-options"
+                ]
+              },
+              "domain-name": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "domain-name-servers": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "ntp-servers": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "present": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ]
+          },
+          "flow-logs": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "flow-logs"
+                ]
+              },
+              "enabled": {
+                "type": "boolean",
+                "default": false
+              },
+              "op": {
+                "enum": [
+                  "equal",
+                  "not-equal"
+                ],
+                "default": "equal"
+              },
+              "set-op": {
+                "enum": [
+                  "or",
+                  "and"
+                ],
+                "default": "or"
+              },
+              "status": {
+                "enum": [
+                  "active"
+                ]
+              },
+              "deliver-status": {
+                "enum": [
+                  "success",
+                  "failure"
+                ]
+              },
+              "destination": {
+                "type": "string"
+              },
+              "destination-type": {
+                "enum": [
+                  "s3",
+                  "cloud-watch-logs"
+                ]
+              },
+              "traffic-type": {
+                "enum": [
+                  "accept",
+                  "reject",
+                  "all"
+                ]
+              },
+              "log-format": {
+                "type": "string"
+              },
+              "log-group": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ]
+          },
+          "internet-gateway": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "internet-gateway"
+                ]
+              },
+              "key": {
+                "type": "string"
+              },
+              "value_type": {
+                "$ref": "#/definitions/filters_common/value_types"
+              },
+              "default": {
+                "type": "object"
+              },
+              "value_regex": {
+                "type": "string"
+              },
+              "value_from": {
+                "$ref": "#/definitions/filters_common/value_from"
+              },
+              "value": {
+                "$ref": "#/definitions/filters_common/value"
+              },
+              "op": {
+                "$ref": "#/definitions/filters_common/comparison_operators"
+              },
+              "match-resource": {
+                "type": "boolean"
+              },
+              "operator": {
+                "enum": [
+                  "and",
+                  "or"
+                ]
+              }
+            }
+          },
+          "json-diff": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "json-diff"
+                ]
+              },
+              "selector": {
+                "enum": [
+                  "previous",
+                  "date",
+                  "locked"
+                ]
+              },
+              "selector_value": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ]
+          },
+          "nat-gateway": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "nat-gateway"
+                ]
+              },
+              "key": {
+                "type": "string"
+              },
+              "value_type": {
+                "$ref": "#/definitions/filters_common/value_types"
+              },
+              "default": {
+                "type": "object"
+              },
+              "value_regex": {
+                "type": "string"
+              },
+              "value_from": {
+                "$ref": "#/definitions/filters_common/value_from"
+              },
+              "value": {
+                "$ref": "#/definitions/filters_common/value"
+              },
+              "op": {
+                "$ref": "#/definitions/filters_common/comparison_operators"
+              },
+              "match-resource": {
+                "type": "boolean"
+              },
+              "operator": {
+                "enum": [
+                  "and",
+                  "or"
+                ]
+              }
+            }
+          },
+          "security-group": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "security-group"
+                ]
+              },
+              "key": {
+                "type": "string"
+              },
+              "value_type": {
+                "$ref": "#/definitions/filters_common/value_types"
+              },
+              "default": {
+                "type": "object"
+              },
+              "value_regex": {
+                "type": "string"
+              },
+              "value_from": {
+                "$ref": "#/definitions/filters_common/value_from"
+              },
+              "value": {
+                "$ref": "#/definitions/filters_common/value"
+              },
+              "op": {
+                "$ref": "#/definitions/filters_common/comparison_operators"
+              },
+              "match-resource": {
+                "type": "boolean"
+              },
+              "operator": {
+                "enum": [
+                  "and",
+                  "or"
+                ]
+              }
+            }
+          },
+          "subnet": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "subnet"
+                ]
+              },
+              "key": {
+                "type": "string"
+              },
+              "value_type": {
+                "$ref": "#/definitions/filters_common/value_types"
+              },
+              "default": {
+                "type": "object"
+              },
+              "value_regex": {
+                "type": "string"
+              },
+              "value_from": {
+                "$ref": "#/definitions/filters_common/value_from"
+              },
+              "value": {
+                "$ref": "#/definitions/filters_common/value"
+              },
+              "op": {
+                "$ref": "#/definitions/filters_common/comparison_operators"
+              },
+              "match-resource": {
+                "type": "boolean"
+              },
+              "operator": {
+                "enum": [
+                  "and",
+                  "or"
+                ]
+              }
+            }
+          },
+          "vpc-attributes": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "vpc-attributes"
+                ]
+              },
+              "dnshostnames": {
+                "type": "boolean"
+              },
+              "dnssupport": {
+                "type": "boolean"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ]
+          },
+          "vpc-endpoint": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "vpc-endpoint"
+                ]
+              },
+              "key": {
+                "type": "string"
+              },
+              "value_type": {
+                "$ref": "#/definitions/filters_common/value_types"
+              },
+              "default": {
+                "type": "object"
+              },
+              "value_regex": {
+                "type": "string"
+              },
+              "value_from": {
+                "$ref": "#/definitions/filters_common/value_from"
+              },
+              "value": {
+                "$ref": "#/definitions/filters_common/value"
+              },
+              "op": {
+                "$ref": "#/definitions/filters_common/comparison_operators"
+              }
+            }
+          }
+        },
+        "policy": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/policy"
+            },
+            {
+              "properties": {
+                "resource": {
+                  "enum": [
+                    "aws.vpc",
+                    "vpc"
+                  ]
+                },
+                "filters": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/filters/aws.config-compliance"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/dhcp-options"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/event"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/aws.finding"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/flow-logs"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/internet-gateway"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/json-diff"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/aws.marked-for-op"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/nat-gateway"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/aws.ops-item"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/aws.reduce"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/security-group"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/subnet"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/aws.tag-count"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/value"
+                      },
+                      {
+                        "$ref": "#/definitions/filters/valuekv"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/vpc-attributes"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/filters/vpc-endpoint"
+                      },
+                      {
+                        "enum": [
+                          "value",
+                          "or",
+                          "and",
+                          "not",
+                          "event",
+                          "reduce",
+                          "marked-for-op",
+                          "tag-count",
+                          "flow-logs",
+                          "security-group",
+                          "subnet",
+                          "nat-gateway",
+                          "internet-gateway",
+                          "vpc-attributes",
+                          "dhcp-options",
+                          "vpc-endpoint",
+                          "config-compliance",
+                          "finding",
+                          "ops-item",
+                          "json-diff"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "or": {
+                            "$ref": "#/definitions/resources/aws.vpc/policy/allOf/1/properties/filters"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "and": {
+                            "$ref": "#/definitions/resources/aws.vpc/policy/allOf/1/properties/filters"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "not": {
+                            "$ref": "#/definitions/resources/aws.vpc/policy/allOf/1/properties/filters"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "actions": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/definitions/actions/aws.auto-tag-user"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.copy-related-tag"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.invoke-lambda"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.invoke-sfn"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.mark-for-op"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.normalize-tag"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.notify"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.post-finding"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.post-item"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.put-metric"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.remove-tag"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.rename-tag"
+                      },
+                      {
+                        "$ref": "#/definitions/resources/aws.vpc/actions/set-flow-log"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.tag"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.tag-trim"
+                      },
+                      {
+                        "$ref": "#/definitions/actions/aws.webhook"
+                      },
+                      {
+                        "enum": [
+                          "webhook",
+                          "auto-tag-user",
+                          "mark-for-op",
+                          "tag-trim",
+                          "mark",
+                          "tag",
+                          "unmark",
+                          "untag",
+                          "remove-tag",
+                          "rename-tag",
+                          "normalize-tag",
+                          "post-finding",
+                          "set-flow-log",
+                          "invoke-lambda",
+                          "put-metric",
+                          "notify",
+                          "copy-related-tag",
+                          "invoke-sfn",
+                          "post-item"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "string_dict": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    },
+    "basic_dict": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      }
+    },
+    "iam-statement": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Sid": {
+          "type": "string"
+        },
+        "Effect": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Deny"
+          ]
+        },
+        "Principal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
+        "NotPrincipal": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
+        "Action": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
+        "NotAction": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
+        "Resource": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
+        "NotResource": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
+        "Condition": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "Sid",
+        "Effect"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "Principal",
+            "Action",
+            "Resource"
+          ]
+        },
+        {
+          "required": [
+            "NotPrincipal",
+            "Action",
+            "Resource"
+          ]
+        },
+        {
+          "required": [
+            "Principal",
+            "NotAction",
+            "Resource"
+          ]
+        },
+        {
+          "required": [
+            "NotPrincipal",
+            "NotAction",
+            "Resource"
+          ]
+        },
+        {
+          "required": [
+            "Principal",
+            "Action",
+            "NotResource"
+          ]
+        },
+        {
+          "required": [
+            "NotPrincipal",
+            "Action",
+            "NotResource"
+          ]
+        },
+        {
+          "required": [
+            "Principal",
+            "NotAction",
+            "NotResource"
+          ]
+        },
+        {
+          "required": [
+            "NotPrincipal",
+            "NotAction",
+            "NotResource"
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "aws.auto-tag-user": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "auto-tag-user"
+            ]
+          },
+          "user-type": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "IAMUser",
+                "AssumedRole",
+                "FederatedUser"
+              ]
+            }
+          },
+          "update": {
+            "type": "boolean"
+          },
+          "tag": {
+            "type": "string"
+          },
+          "principal_id_tag": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "tag",
+          "type"
+        ]
+      },
+      "aws.copy-related-tag": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "copy-related-tag"
+            ]
+          },
+          "resource": {
+            "type": "string"
+          },
+          "skip_missing": {
+            "type": "boolean"
+          },
+          "key": {
+            "type": "string"
+          },
+          "tags": {
+            "oneOf": [
+              {
+                "enum": [
+                  "*"
+                ]
+              },
+              {
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "tags",
+          "key",
+          "resource",
+          "type"
+        ]
+      },
+      "aws.invoke-lambda": {
+        "type": "object",
+        "required": [
+          "type",
+          "function"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "enum": [
+              "invoke-lambda"
+            ]
+          },
+          "function": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "async": {
+            "type": "boolean"
+          },
+          "qualifier": {
+            "type": "string"
+          },
+          "batch_size": {
+            "type": "integer"
+          },
+          "timeout": {
+            "type": "integer"
+          },
+          "vars": {
+            "type": "object"
+          }
+        }
+      },
+      "aws.invoke-sfn": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "invoke-sfn"
+            ]
+          },
+          "state-machine": {
+            "type": "string"
+          },
+          "batch-size": {
+            "type": "integer"
+          },
+          "bulk": {
+            "type": "boolean"
+          },
+          "policy": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "state-machine",
+          "type"
+        ]
+      },
+      "aws.mark-for-op": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "mark-for-op"
+            ]
+          },
+          "tag": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "days": {
+            "type": "number",
+            "minimum": 0
+          },
+          "hours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "tz": {
+            "type": "string"
+          },
+          "op": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.normalize-tag": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "normalize-tag"
+            ]
+          },
+          "key": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string",
+            "items": {
+              "enum": [
+                "upper",
+                "lower",
+                "titlestrip",
+                "replace"
+              ]
+            }
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.notify": {
+        "type": "object",
+        "anyOf": [
+          {
+            "required": [
+              "type",
+              "transport",
+              "to"
+            ]
+          },
+          {
+            "required": [
+              "type",
+              "transport",
+              "to_from"
+            ]
+          }
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "notify"
+            ]
+          },
+          "to": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "owner_absent_contact": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "to_from": {
+            "type": "object",
+            "additionalProperties": "False",
+            "required": [
+              "url"
+            ],
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "format": {
+                "enum": [
+                  "csv",
+                  "json",
+                  "txt",
+                  "csv2dict"
+                ]
+              },
+              "expr": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cc_from": {
+            "type": "object",
+            "additionalProperties": "False",
+            "required": [
+              "url"
+            ],
+            "properties": {
+              "url": {
+                "type": "string"
+              },
+              "format": {
+                "enum": [
+                  "csv",
+                  "json",
+                  "txt",
+                  "csv2dict"
+                ]
+              },
+              "expr": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          },
+          "cc_manager": {
+            "type": "boolean"
+          },
+          "from": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "template": {
+            "type": "string"
+          },
+          "transport": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "type",
+                  "queue"
+                ],
+                "properties": {
+                  "queue": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "enum": [
+                      "sqs"
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "type",
+                  "topic"
+                ],
+                "properties": {
+                  "topic": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "enum": [
+                      "sns"
+                    ]
+                  },
+                  "attributes": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "assume_role": {
+            "type": "boolean"
+          }
+        }
+      },
+      "aws.post-finding": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "post-finding"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "default": "policy.name"
+          },
+          "description": {
+            "type": "string",
+            "default": "policy.description, or if not defined in policy then policy.name"
+          },
+          "severity": {
+            "type": "number",
+            "default": 0
+          },
+          "severity_normalized": {
+            "type": "number",
+            "min": 0,
+            "max": 100,
+            "default": 0
+          },
+          "severity_label": {
+            "type": "string",
+            "default": "INFORMATIONAL",
+            "enum": [
+              "INFORMATIONAL",
+              "LOW",
+              "MEDIUM",
+              "HIGH",
+              "CRITICAL"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "criticality": {
+            "type": "number",
+            "min": 0,
+            "max": 100
+          },
+          "region": {
+            "type": "string",
+            "description": "cross-region aggregation target"
+          },
+          "recommendation": {
+            "type": "string"
+          },
+          "recommendation_url": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object"
+          },
+          "batch_size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 1
+          },
+          "types": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "compliance_status": {
+            "type": "string",
+            "enum": [
+              "PASSED",
+              "WARNING",
+              "FAILED",
+              "NOT_AVAILABLE"
+            ]
+          },
+          "record_state": {
+            "type": "string",
+            "default": "ACTIVE",
+            "enum": [
+              "ACTIVE",
+              "ARCHIVED"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "types",
+          "type"
+        ]
+      },
+      "aws.post-item": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "post-item"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "object"
+          },
+          "priority": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "topics": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.put-metric": {
+        "type": "object",
+        "required": [
+          "type",
+          "key",
+          "namespace",
+          "metric_name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "enum": [
+              "put-metric"
+            ]
+          },
+          "key": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "metric_name": {
+            "type": "string"
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "op": {
+            "enum": [
+              "count",
+              "distinct_count",
+              "sum",
+              "average"
+            ]
+          },
+          "units": {
+            "enum": [
+              "Seconds",
+              "Microseconds",
+              "Milliseconds",
+              "Bytes",
+              "Kilobytes",
+              "Megabytes",
+              "Gigabytes",
+              "Terabytes",
+              "Bits",
+              "Kilobits",
+              "Megabits",
+              "Gigabits",
+              "Terabits",
+              "Bytes/Second",
+              "Kilobytes/Second",
+              "Megabytes/Second",
+              "Gigabytes/Second",
+              "Terabytes/Second",
+              "Bits/Second",
+              "Kilobits/Second",
+              "Megabits/Second",
+              "Gigabits/Second",
+              "Terabits/Second",
+              "Count/Second",
+              "Percent",
+              "Count",
+              "None"
+            ]
+          }
+        }
+      },
+      "aws.remove-tag": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "remove-tag",
+              "unmark",
+              "untag",
+              "remove-tag"
+            ]
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.rename-tag": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "rename-tag"
+            ]
+          },
+          "old_key": {
+            "type": "string"
+          },
+          "new_key": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.tag": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "tag",
+              "mark"
+            ]
+          },
+          "tags": {
+            "type": "object"
+          },
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.tag-trim": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "tag-trim"
+            ]
+          },
+          "space": {
+            "type": "integer"
+          },
+          "preserve": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.webhook": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "webhook"
+            ]
+          },
+          "url": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "batch": {
+            "type": "boolean"
+          },
+          "batch-size": {
+            "type": "number"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "PUT",
+              "POST",
+              "GET",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "query-params": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "description": "query string values"
+            }
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "description": "header values"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "type"
+        ]
+      }
+    },
+    "filters": {
+      "value": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "value"
+            ]
+          },
+          "key": {
+            "type": "string"
+          },
+          "value_type": {
+            "$ref": "#/definitions/filters_common/value_types"
+          },
+          "default": {
+            "type": "object"
+          },
+          "value_regex": {
+            "type": "string"
+          },
+          "value_from": {
+            "$ref": "#/definitions/filters_common/value_from"
+          },
+          "value": {
+            "$ref": "#/definitions/filters_common/value"
+          },
+          "op": {
+            "$ref": "#/definitions/filters_common/comparison_operators"
+          }
+        }
+      },
+      "event": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "event"
+            ]
+          },
+          "key": {
+            "type": "string"
+          },
+          "value_type": {
+            "$ref": "#/definitions/filters_common/value_types"
+          },
+          "default": {
+            "type": "object"
+          },
+          "value_regex": {
+            "type": "string"
+          },
+          "value_from": {
+            "$ref": "#/definitions/filters_common/value_from"
+          },
+          "value": {
+            "$ref": "#/definitions/filters_common/value"
+          },
+          "op": {
+            "$ref": "#/definitions/filters_common/comparison_operators"
+          }
+        }
+      },
+      "age": null,
+      "reduce": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "reduce"
+            ]
+          },
+          "group-by": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "key": {
+                  "type": "string"
+                },
+                "value_type": {
+                  "enum": [
+                    "string",
+                    "number",
+                    "date"
+                  ]
+                },
+                "value_regex": "string"
+              }
+            ]
+          },
+          "sort-by": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "key": {
+                  "type": "string"
+                },
+                "value_type": {
+                  "enum": [
+                    "string",
+                    "number",
+                    "date"
+                  ]
+                },
+                "value_regex": "string"
+              }
+            ]
+          },
+          "order": {
+            "enum": [
+              "asc",
+              "desc",
+              "reverse",
+              "randomize"
+            ]
+          },
+          "null-order": {
+            "enum": [
+              "first",
+              "last"
+            ]
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 0
+          },
+          "limit-percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "discard": {
+            "type": "number",
+            "minimum": 0
+          },
+          "discard-percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      },
+      "valuekv": {
+        "type": "object",
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "maxItems": 0
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "minProperties": 1,
+        "maxProperties": 1
+      },
+      "aws.config-compliance": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "config-compliance"
+            ]
+          },
+          "op": {
+            "enum": [
+              "or",
+              "and"
+            ]
+          },
+          "eval_filters": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/filters/valuekv"
+                },
+                {
+                  "$ref": "#/definitions/filters/value"
+                }
+              ]
+            }
+          },
+          "states": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "COMPLIANT",
+                "NON_COMPLIANT",
+                "NOT_APPLICABLE",
+                "INSUFFICIENT_DATA"
+              ]
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "rules"
+        ]
+      },
+      "aws.finding": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "finding"
+            ]
+          },
+          "region": {
+            "type": "string"
+          },
+          "query": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.marked-for-op": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "marked-for-op"
+            ]
+          },
+          "tag": {
+            "type": "string"
+          },
+          "tz": {
+            "type": "string"
+          },
+          "skew": {
+            "type": "number",
+            "minimum": 0
+          },
+          "skew_hours": {
+            "type": "number",
+            "minimum": 0
+          },
+          "op": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.ops-item": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "ops-item"
+            ]
+          },
+          "status": {
+            "type": "array",
+            "default": [
+              "Open"
+            ],
+            "items": {
+              "enum": [
+                "Open",
+                "In progress",
+                "Resolved"
+              ]
+            }
+          },
+          "priority": {
+            "type": "array",
+            "items": {
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ]
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      },
+      "aws.reduce": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "reduce"
+            ]
+          },
+          "group-by": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "key": {
+                  "type": "string"
+                },
+                "value_type": {
+                  "enum": [
+                    "string",
+                    "number",
+                    "date"
+                  ]
+                },
+                "value_regex": "string"
+              }
+            ]
+          },
+          "sort-by": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "key": {
+                  "type": "string"
+                },
+                "value_type": {
+                  "enum": [
+                    "string",
+                    "number",
+                    "date"
+                  ]
+                },
+                "value_regex": "string"
+              }
+            ]
+          },
+          "order": {
+            "enum": [
+              "asc",
+              "desc",
+              "reverse",
+              "randomize"
+            ]
+          },
+          "null-order": {
+            "enum": [
+              "first",
+              "last"
+            ]
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 0
+          },
+          "limit-percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "discard": {
+            "type": "number",
+            "minimum": 0
+          },
+          "discard-percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      },
+      "aws.tag-count": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "tag-count"
+            ]
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "op": {
+            "enum": [
+              "eq",
+              "equal",
+              "ne",
+              "not-equal",
+              "gt",
+              "greater-than",
+              "ge",
+              "gte",
+              "le",
+              "lte",
+              "lt",
+              "less-than",
+              "glob",
+              "regex",
+              "regex-case",
+              "in",
+              "ni",
+              "not-in",
+              "contains",
+              "difference",
+              "intersect"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "type"
+        ]
+      }
+    },
+    "filters_common": {
+      "comparison_operators": {
+        "enum": [
+          "eq",
+          "equal",
+          "ne",
+          "not-equal",
+          "gt",
+          "greater-than",
+          "ge",
+          "gte",
+          "le",
+          "lte",
+          "lt",
+          "less-than",
+          "glob",
+          "regex",
+          "regex-case",
+          "in",
+          "ni",
+          "not-in",
+          "contains",
+          "difference",
+          "intersect"
+        ]
+      },
+      "value_types": {
+        "enum": [
+          "age",
+          "integer",
+          "expiration",
+          "normalize",
+          "size",
+          "cidr",
+          "cidr_size",
+          "swap",
+          "resource_count",
+          "expr",
+          "unique_size",
+          "date",
+          "version"
+        ]
+      },
+      "value_from": {
+        "type": "object",
+        "additionalProperties": "False",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "format": {
+            "enum": [
+              "csv",
+              "json",
+              "txt",
+              "csv2dict"
+            ]
+          },
+          "expr": {
+            "oneOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      },
+      "value": {
+        "oneOf": [
+          {
+            "type": "array"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "policy": {
+      "type": "object",
+      "required": [
+        "name",
+        "resource"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[A-z][A-z0-9]*(-[A-z0-9]+)*$"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "or": {
+                    "$ref": "#/definitions/policy/properties/conditions"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "not": {
+                    "$ref": "#/definitions/policy/properties/conditions"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "and": {
+                    "$ref": "#/definitions/policy/properties/conditions"
+                  }
+                }
+              },
+              {
+                "$ref": "#/definitions/filters/value"
+              },
+              {
+                "$ref": "#/definitions/filters/event"
+              },
+              {
+                "$ref": "#/definitions/filters/valuekv"
+              }
+            ]
+          }
+        },
+        "region": {
+          "type": "string"
+        },
+        "tz": {
+          "type": "string"
+        },
+        "start": {
+          "format": "date-time"
+        },
+        "end": {
+          "format": "date-time"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "max-resources": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "$ref": "#/definitions/max-resources-properties"
+            }
+          ]
+        },
+        "max-resources-percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "comment": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object"
+        },
+        "mode": {
+          "$ref": "#/definitions/policy-mode"
+        },
+        "source": {
+          "enum": [
+            "describe",
+            "describe-child",
+            "config",
+            "describe-azure",
+            "resource-graph",
+            "describe-child-azure",
+            "describe-kube",
+            "describe-openstack",
+            "describe-rest-stage",
+            "describe-rest-resource",
+            "describe-ecs-service",
+            "describe-ecs-task",
+            "describe-ecs-container-instance",
+            "describe-eks-nodegroup",
+            "transit-attachment",
+            "describe-table",
+            "describe-ecr-image",
+            "describe-azure-roledefinition",
+            "describe-azure-generic",
+            "describe-gcp",
+            "inventory"
+          ]
+        },
+        "actions": {
+          "type": "array"
+        },
+        "filters": {
+          "type": "array"
+        },
+        "query": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "policy-mode": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "pull"
+              ]
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "periodic"
+              ]
+            },
+            "schedule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "phd"
+              ]
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "issue",
+                  "accountNotification",
+                  "scheduledChange"
+                ]
+              }
+            },
+            "statuses": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "open",
+                  "upcoming",
+                  "closed"
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "cloudtrail"
+              ]
+            },
+            "delay": {
+              "type": "integer",
+              "description": "sleep for delay seconds before processing an event"
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "event",
+                      "source",
+                      "ids"
+                    ],
+                    "properties": {
+                      "source": {
+                        "type": "string"
+                      },
+                      "ids": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "ec2-instance-state"
+              ]
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "pending",
+                  "running",
+                  "shutting-down",
+                  "stopped",
+                  "stopping",
+                  "terminated"
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "asg-instance-state"
+              ]
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "launch-success",
+                  "launch-failure",
+                  "terminate-success",
+                  "terminate-failure"
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "guard-duty"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "config-poll-rule"
+              ]
+            },
+            "schedule": {
+              "enum": [
+                "One_Hour",
+                "Three_Hours",
+                "Six_Hours",
+                "Twelve_Hours",
+                "TwentyFour_Hours"
+              ]
+            },
+            "ignore-support-check": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "config-rule"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "hub-finding",
+                "hub-action"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "function-prefix": {
+              "type": "string"
+            },
+            "member-role": {
+              "type": "string"
+            },
+            "packages": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "concurrency": {
+              "type": "integer"
+            },
+            "runtime": {
+              "enum": [
+                "python2.7",
+                "python3.6",
+                "python3.7",
+                "python3.8",
+                "python3.9"
+              ]
+            },
+            "role": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "object",
+              "minProperties": 1
+            },
+            "timeout": {
+              "type": "number"
+            },
+            "memory": {
+              "type": "number"
+            },
+            "environment": {
+              "type": "object"
+            },
+            "tags": {
+              "type": "object"
+            },
+            "dead_letter_config": {
+              "type": "object"
+            },
+            "kms_key_arn": {
+              "type": "string"
+            },
+            "tracing_config": {
+              "type": "object"
+            },
+            "security_groups": {
+              "type": "array"
+            },
+            "subnets": {
+              "type": "array"
+            },
+            "type": {
+              "enum": [
+                "hub-finding",
+                "hub-action"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provision-options": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "identity": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "Embedded"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "appInsights": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "resourceGroupName": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "storageAccount": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "resourceGroupName": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "servicePlan": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "resourceGroupName": {
+                          "type": "string"
+                        },
+                        "skuTier": {
+                          "type": "string"
+                        },
+                        "skuName": {
+                          "type": "string"
+                        },
+                        "autoScale": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "enabled": {
+                              "type": "boolean"
+                            },
+                            "minCapacity": {
+                              "type": "string"
+                            },
+                            "maxCapacity": {
+                              "type": "string"
+                            },
+                            "defaultCapacity": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "execution-options": {
+              "type": "object"
+            },
+            "type": {
+              "enum": [
+                "azure-periodic"
+              ]
+            },
+            "schedule": {
+              "type": "string",
+              "pattern": "^\\s?([0-5]?[0-9]|\\,|(\\*\\/)|\\-)+ (\\*|[0-5]?[0-9]|\\,|\\/|\\-)+ (\\*|[0-9]|(1[0-9])|(2[0-3])|\\,|\\/|\\-)+ (\\*|[1-9]|([1-2][0-9])|(3[0-1])|\\,|\\*\\/|\\-)+ ([Jj](an|anuary)|[Ff](eb|ebruary)|[Mm](ar|arch)|[Aa](pr|pril)|[Mm]ay|[Jj](un|une)|[Jj](ul|uly)|[Aa](ug|ugust)|[Ss](ep|eptember)|[Oo](ct|ctober)|[Nn](ov|ovember)|[Dd](ec|ecember)|\\,|\\*\\/|[1-9]|(1[0-2])|\\*)+ ([Mm](on|onday)|[Tt](u|ue|ues|uesday)|[Ww](ed|ednesday)|[Tt](hu|hursday)|[Ff](ri|riday)|[Ss](at|aturday)|[Ss](un|unday)|[0-6]|\\,|\\*|\\-)+\\s?$"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "provision-options": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "identity": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "Embedded"
+                      ]
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "appInsights": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "resourceGroupName": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "storageAccount": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "resourceGroupName": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "servicePlan": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "resourceGroupName": {
+                          "type": "string"
+                        },
+                        "skuTier": {
+                          "type": "string"
+                        },
+                        "skuName": {
+                          "type": "string"
+                        },
+                        "autoScale": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "enabled": {
+                              "type": "boolean"
+                            },
+                            "minCapacity": {
+                              "type": "string"
+                            },
+                            "maxCapacity": {
+                              "type": "string"
+                            },
+                            "defaultCapacity": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "execution-options": {
+              "type": "object"
+            },
+            "type": {
+              "enum": [
+                "azure-event-grid"
+              ]
+            },
+            "events": {
+              "type": "array",
+              "maxItems": 5,
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "resourceProvider",
+                      "event"
+                    ],
+                    "properties": {
+                      "resourceProvider": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "events",
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "type": {
+              "enum": [
+                "container-periodic"
+              ]
+            },
+            "schedule": {
+              "type": "string",
+              "pattern": "^\\s?(\\*|[0-9]|\\,|\\/|\\-)+ (\\*|[0-9]|\\,|\\/|\\-)+ (\\*|[1-9]|[1-2][0-9]|3[0-1]|\\,|\\*\\/|\\-)+ (jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\\,|\\*\\/|[1-9]|1[0-2]|\\*)+ (mon|tue|wed|thu|fri|sat|sun|[0-6]|\\,|\\*|\\-)+\\s?$"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "execution-options": {
+              "type": "object"
+            },
+            "type": {
+              "enum": [
+                "container-event"
+              ]
+            },
+            "events": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "resourceProvider",
+                      "event"
+                    ],
+                    "properties": {
+                      "resourceProvider": {
+                        "type": "string"
+                      },
+                      "event": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "gcp-periodic"
+              ]
+            },
+            "execution-options": {
+              "$ref": "#/definitions/basic_dict"
+            },
+            "timeout": {
+              "type": "string"
+            },
+            "memory-size": {
+              "type": "integer"
+            },
+            "labels": {
+              "$ref": "#/definitions/string_dict"
+            },
+            "network": {
+              "type": "string"
+            },
+            "max-instances": {
+              "type": "integer"
+            },
+            "service-account": {
+              "type": "string"
+            },
+            "environment": {
+              "$ref": "#/definitions/string_dict"
+            },
+            "target-type": {
+              "enum": [
+                "http",
+                "pubsub"
+              ]
+            },
+            "tz": {
+              "type": "string"
+            },
+            "schedule": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "schedule",
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "gcp-audit"
+              ]
+            },
+            "execution-options": {
+              "$ref": "#/definitions/basic_dict"
+            },
+            "timeout": {
+              "type": "string"
+            },
+            "memory-size": {
+              "type": "integer"
+            },
+            "labels": {
+              "$ref": "#/definitions/string_dict"
+            },
+            "network": {
+              "type": "string"
+            },
+            "max-instances": {
+              "type": "integer"
+            },
+            "service-account": {
+              "type": "string"
+            },
+            "environment": {
+              "$ref": "#/definitions/string_dict"
+            },
+            "methods": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "methods",
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "gcp-scc"
+              ]
+            },
+            "execution-options": {
+              "$ref": "#/definitions/basic_dict"
+            },
+            "timeout": {
+              "type": "string"
+            },
+            "memory-size": {
+              "type": "integer"
+            },
+            "labels": {
+              "$ref": "#/definitions/string_dict"
+            },
+            "network": {
+              "type": "string"
+            },
+            "max-instances": {
+              "type": "integer"
+            },
+            "service-account": {
+              "type": "string"
+            },
+            "environment": {
+              "$ref": "#/definitions/string_dict"
+            },
+            "org": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "org",
+            "type"
+          ]
+        }
+      ]
+    },
+    "max-resources-properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "op": {
+          "enum": [
+            "or",
+            "and"
+          ]
+        },
+        "percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    }
+  },
+  "type": "object",
+  "required": [
+    "policies"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "vars": {
+      "type": "object"
+    },
+    "policies": {
+      "type": "array",
+      "additionalItems": false,
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/definitions/resources/aws.vpc/policy"
+          }
+        ]
+      }
+    }
+  }
+}
