@@ -8,6 +8,7 @@ const project = new cdktf.ConstructLibraryCdktf({
   repositoryUrl: 'https://github.com/gmeligio/cdkc7n.git',
   jest: false,
   mergify: false,
+  license: 'MIT',
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
