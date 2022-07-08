@@ -1,7 +1,7 @@
 const { cdktf } = require('projen');
 const project = new cdktf.ConstructLibraryCdktf({
   author: 'Eligio Mariño',
-  authorAddress: 'gmeligio@gmail.com',
+  authorUrl: 'https://elig.io',
   cdktfVersion: '^0.11.2',
   defaultReleaseBranch: 'main',
   name: 'cdkc7n',
