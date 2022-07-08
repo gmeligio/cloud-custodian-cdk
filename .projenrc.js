@@ -8,8 +8,9 @@ const project = new cdktf.ConstructLibraryCdktf({
   repositoryUrl: 'https://github.com/gmeligio/cdkc7n.git',
   jest: false,
   mergify: false,
+  github: false,
   license: 'MIT',
-  deps: ['ajv'],
+  bundledDependencies: ['ajv'],
 
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
