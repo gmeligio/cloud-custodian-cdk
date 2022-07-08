@@ -1,10 +1,6 @@
 {
   "dependencies": [
     {
-      "name": "@types/jest",
-      "type": "build"
-    },
-    {
       "name": "@types/node",
       "version": "^14",
       "type": "build"
@@ -21,7 +17,7 @@
     },
     {
       "name": "cdktf",
-      "version": "0.8.3",
+      "version": "0.11.2",
       "type": "build"
     },
     {
@@ -44,15 +40,6 @@
     {
       "name": "eslint",
       "version": "^8",
-      "type": "build"
-    },
-    {
-      "name": "jest",
-      "type": "build"
-    },
-    {
-      "name": "jest-junit",
-      "version": "^13",
       "type": "build"
     },
     {
@@ -90,16 +77,12 @@
       "type": "build"
     },
     {
-      "name": "ts-jest",
-      "type": "build"
-    },
-    {
       "name": "typescript",
       "type": "build"
     },
     {
       "name": "cdktf",
-      "version": "^0.8.3",
+      "version": "^0.11.2",
       "type": "peer"
     },
     {
