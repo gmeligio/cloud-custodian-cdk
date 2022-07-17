@@ -11,9 +11,13 @@ const project = new cdktf.ConstructLibraryCdktf({
   github: false,
   license: 'MIT',
   bundledDependencies: ['ajv'],
+  // devDeps: ['npm-check-updates@^15.3.4'],
 
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
   // packageName: undefined,  /* The "name" in package.json. */
 });
+
+project.addDevDeps('npm-check-updates@^15');
+
 project.synth();
