@@ -10,7 +10,10 @@ const project = new cdktf.ConstructLibraryCdktf({
   mergify: false,
   github: false,
   license: 'MIT',
-  bundledDependencies: ['ajv'],
+  deps: [
+    'ajv',
+    'json-schema-to-typescript',
+  ],
   description: 'CDK for Cloud Custodian (CDKC7N)',
   packageName: 'cdkc7n',
 });
