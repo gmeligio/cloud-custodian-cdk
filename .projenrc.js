@@ -5,7 +5,7 @@ const project = new cdktf.ConstructLibraryCdktf({
   cdktfVersion: '^0.11.2',
   defaultReleaseBranch: 'main',
   name: 'cdkc7n',
-  repositoryUrl: 'https://github.com/gmeligio/cdkc7n.git',
+  repositoryUrl: 'https://github.com/gmeligio/cloud-custodian-cdk.git',
   jest: false,
   mergify: false,
   github: false,

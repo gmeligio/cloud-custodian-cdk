@@ -2,7 +2,7 @@
   "name": "cdkc7n",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gmeligio/cdkc7n.git"
+    "url": "https://github.com/gmeligio/cloud-custodian-cdk.git"
   },
   "scripts": {
     "build": "npx projen build",
