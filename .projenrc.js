@@ -11,10 +11,8 @@ const project = new cdktf.ConstructLibraryCdktf({
   github: false,
   license: 'MIT',
   bundledDependencies: ['ajv'],
-
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  description: 'CDK for Cloud Custodian (CDKC7N)',
+  packageName: 'cdkc7n',
 });
 
 project.synth();

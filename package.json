@@ -1,5 +1,6 @@
 {
   "name": "cdkc7n",
+  "description": "CDK for Cloud Custodian (CDKC7N)",
   "repository": {
     "type": "git",
     "url": "https://github.com/gmeligio/cloud-custodian-cdk.git"
