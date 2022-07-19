@@ -6,6 +6,10 @@
       "type": "build"
     },
     {
+      "name": "@types/shelljs",
+      "type": "build"
+    },
+    {
       "name": "@typescript-eslint/eslint-plugin",
       "version": "^5",
       "type": "build"
@@ -91,11 +95,23 @@
       "type": "peer"
     },
     {
+      "name": "@swc-node/register",
+      "type": "runtime"
+    },
+    {
       "name": "ajv",
       "type": "runtime"
     },
     {
       "name": "json-schema-to-typescript",
+      "type": "runtime"
+    },
+    {
+      "name": "node-jq",
+      "type": "runtime"
+    },
+    {
+      "name": "shelljs",
       "type": "runtime"
     }
   ],

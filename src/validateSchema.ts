@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import Ajv from 'ajv';
 
-const schemaString = fs.readFileSync('./config/schema/aws.json', 'utf8');
+const schemaString = fs.readFileSync('./aws.vpc.json', 'utf8');
 const schema = JSON.parse(schemaString);
 const validator = new Ajv();
 if (validator.validateSchema(schema)) {

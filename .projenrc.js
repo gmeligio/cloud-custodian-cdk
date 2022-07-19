@@ -1,11 +1,13 @@
 const { cdktf } = require('projen');
 const project = new cdktf.ConstructLibraryCdktf({
+  name: 'cdkc7n',
+  repositoryUrl: 'https://github.com/gmeligio/cloud-custodian-cdk.git',
+  packageName: 'cdkc7n',
+  description: 'CDK for Cloud Custodian (CDKC7N)',
   author: 'Eligio Mariño',
   authorUrl: 'https://elig.io',
   cdktfVersion: '^0.11.2',
   defaultReleaseBranch: 'main',
-  name: 'cdkc7n',
-  repositoryUrl: 'https://github.com/gmeligio/cloud-custodian-cdk.git',
   jest: false,
   mergify: false,
   github: false,
@@ -13,9 +15,13 @@ const project = new cdktf.ConstructLibraryCdktf({
   deps: [
     'ajv',
     'json-schema-to-typescript',
+    'node-jq',
+    'shelljs',
+    '@swc-node/register',
   ],
-  description: 'CDK for Cloud Custodian (CDKC7N)',
-  packageName: 'cdkc7n',
+  devDeps: [
+    '@types/shelljs',
+  ],
 });
 
 project.synth();
