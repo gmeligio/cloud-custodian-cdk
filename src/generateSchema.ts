@@ -1,27 +1,23 @@
 import * as fs from 'fs';
 import * as path from 'path';
-// import { compileFromFile } from 'json-schema-to-typescript';
-import jq from 'node-jq';
-// import awsVpcSchema from './aws_vpc.json';
+import * as sh from 'shelljs';
 
 const awsVpcSchemaPath = path.resolve(__dirname, './aws_vpc.json');
-const awsVpcSchema = fs.readFileSync(awsVpcSchemaPath, 'utf8');
-// const awsVpcSchema = JSON.parse(awsVpcSchemaString);
 
-// const newAwsVpcSchema = jsonpath.apply(awsVpcSchema, '$..additionalProperties', (additionalProperties) => additionalProperties == 'False' ? false: additionalProperties,
-// );
+const awsVpcSchemaOutput = sh.exec('custodian-cask schema --json aws.vpc', { silent: true }).stdout;
 
-jq.run('.definitions', awsVpcSchema).then((definitions) => {console.debug(definitions);}).catch((err) => {console.error(err);});
+let awsVpcSchema = deleteFirstLines(awsVpcSchemaOutput, 3);
 
-// console.debug(newAwsVpcSchema);
-// fs.writeFileSync(awsVpcSchemaPath, newAwsVpcSchema);
+console.debug(awsVpcSchema);
 
-// const newVpc = {
-// 	...awsVpc,
+fs.writeFileSync(awsVpcSchemaPath, awsVpcSchema);
 
-// }
+function deleteFirstLines(text: string, count: number): string {
+  let output = text;
 
-// Compile from file
-// compileFromFile(path.resolve(__dirname, './aws_vpc.json'), {
-//   strictIndexSignatures: true,
-// }).then((ts) => fs.writeFileSync('./src/generated/awsSchema.ts', ts));
+  while (count--) {
+    output = output.substring(output.indexOf('\n') + 1);
+  }
+
+  return output;
+}
